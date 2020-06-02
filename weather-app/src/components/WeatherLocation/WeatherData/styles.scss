@@ -1,0 +1,21 @@
+@import '../../../App.scss';
+
+.weatherDataCont{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weatherLocationContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.locationContainer{
+    width: 100%;
+    overflow: auto;
+}

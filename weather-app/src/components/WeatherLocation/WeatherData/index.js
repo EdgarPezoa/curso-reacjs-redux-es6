@@ -1,15 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Papper from '@material-ui/core/Paper';
+
 import WeatherExtraInfo from './WeatherExtraInfo';
 import WeatherTemperature from './WeatherTemperature';
-import { SUN } from '../../../const/Weather';
+import './styles.scss';
 
-const WeatherData = () => {
+const WeatherData = (props) => {
+    const { temperature, weatherState, humidity, wind } = props.data;
     return (
-        <div>
-            <WeatherTemperature temperature={ 20 } weatherState = { SUN } />
-            <WeatherExtraInfo himidity={ 80 } wind={"10 m/s"} />
-        </div>
+        <Papper elevation={3}>
+            <div className="weatherDataCont">
+                <WeatherTemperature temperature={ temperature } weatherState = { weatherState } />
+                <WeatherExtraInfo humidity={ humidity } wind={ wind } />
+            </div>
+        </Papper>
     )
 };
 
-export default WeatherData;
+WeatherData.propTypes = {
+    data: PropTypes.shape({
+        temperature: PropTypes.number.isRequired,
+        weatherState: PropTypes.string.isRequired,
+        humidity: PropTypes.number.isRequired,
+        wind: PropTypes.string.isRequired
+    })
+};
+
+export default WeatherData; 

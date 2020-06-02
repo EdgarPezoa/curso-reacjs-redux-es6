@@ -1,0 +1,23 @@
+@import '../App.scss';
+
+
+.forecastExtendedContainer{
+    text-align:center;
+    padding:10px;
+    overflow: auto;
+    height: 80vh;
+    margin: 10px;
+}
+
+.locationListContainer{
+    height: 85vh;
+    overflow: auto;
+    margin: 10px;
+}
+
+@media (max-width: $breakpoint_phone){
+    .locationListContainer{
+        max-height: 45vh;
+        overflow: auto;
+    }
+}
