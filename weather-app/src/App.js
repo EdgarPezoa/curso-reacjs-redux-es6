@@ -6,9 +6,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 
-//Components
-import LocationList from './components/LocationList';
-import ForeCastExtended from './components/ForecastExtended';
+//Containers
+import LocationListContainer from './containers/LocationListContainer';
+import ForecastExtendedContainer from './containers/ForecastExtendedContainer';
 
 const cities = [
   'London,uk',
@@ -17,12 +17,8 @@ const cities = [
   'Washington, us',
   'Bogota, col'
 ];
-function App() {
-  const [city, setCity] = useState(null);
-  const handleSelectionLocation = newCity => {
-    setCity(newCity);
-  };
 
+function App(props) {
   return (
     <Grid>
       <Row>
@@ -37,20 +33,12 @@ function App() {
       <Row>
         <Col xs={12} sm={6} md={6} lg={6}>
           <Papper elevation={3}>
-            <LocationList 
-              cities={cities} 
-              onSelectedLocation={ handleSelectionLocation }
-            />
+            <LocationListContainer cities={cities} />
           </Papper>
         </Col>
         <Col xs={12} sm={6} md={6} lg={6}>
           <Papper elevation={3}>
-            {
-              city &&
-              <ForeCastExtended city={ city }/>
-            }
-            
-            
+            <ForecastExtendedContainer />
           </Papper>
         </Col>
       </Row>
