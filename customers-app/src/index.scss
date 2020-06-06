@@ -1,0 +1,35 @@
+$red : red;
+$green : green;
+$lightGrey: lightgrey;
+
+body {
+  text-align: center;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.customersList{
+  border: 1px solid $lightGrey;
+}
+.customerListItem{
+  border-bottom: 1px solid $lightGrey;
+  display: flex;
+  justify-content: left;
+  width: calc(100% - 20px);
+  padding: 10px;
+}
+
+.field{
+  width:100%;
+  margin-left: 10px;
+  margin-right: 10px;
+}

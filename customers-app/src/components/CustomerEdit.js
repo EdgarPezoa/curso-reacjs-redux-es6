@@ -1,0 +1,20 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const CustomerEdit = (props) => {
+    const { name, dni, age } = props;
+    return(
+        <div className="customerEdit">
+            <h2>Edicion de cliente</h2>
+            <h3>Nombre: {name} / DNI: {dni} / Edad: {age}</h3>
+        </div>
+    );
+};
+
+CustomerEdit.propTypes = {
+    name: PropTypes.string.isRequired,
+    dni: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired
+}
+
+export default CustomerEdit;
