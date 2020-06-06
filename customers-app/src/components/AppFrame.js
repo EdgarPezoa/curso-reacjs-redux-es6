@@ -9,7 +9,6 @@ const AppFrame = (props) => {
             <AppHeader title={ header } />
             <div className="">{ body }</div>
             {/* <div className="">{ footer }</div> */}
-            <div>APLICACION DE EJEMPLO</div>
         </div>
     );
 };

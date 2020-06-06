@@ -10,6 +10,7 @@ import CustomersActions from '../components/CustomersActions';
 
 //Redux
 import { fetchCustomers } from '../redux/actions/fetchCustomers';
+import { getCustomers } from '../redux/selectors/customers';
 
 const CustomersContainer = (props) => {
     const { customers , history, fetchCustomers } = props;
@@ -57,7 +58,7 @@ CustomersContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    customers: state.customers
+    customers: getCustomers(state)
 });
 
 const mapDispatchToProps =  { fetchCustomers };
