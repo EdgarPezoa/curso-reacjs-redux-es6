@@ -16,7 +16,9 @@ const CustomersContainer = (props) => {
     const { customers , history, fetchCustomers } = props;
 
     useEffect(()=>{
-        fetchCustomers();
+        if(customers.length === 0){
+            fetchCustomers();
+        }
     },[]);
 
     const handleAddNew = () => {
