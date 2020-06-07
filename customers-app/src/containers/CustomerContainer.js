@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
+import { SubmissionError } from 'redux-form';
 
 //Components
 import AppFrame from '../components/AppFrame';
@@ -10,10 +11,34 @@ import CustomerEdit from '../components/CustomerEdit';
 
 //Redux
 import { getCustomerByDni } from '../redux/selectors/customers';
-
+import { fetchCustomers } from '../redux/actions/fetchCustomers';
+import { updateCustomer } from '../redux/actions/updateCustomer';
 
 const CustomerContainer = (props) => {
-    const { dni, customer } = props;
+    const { dni, customer, history, fetchCustomers, updateCustomer } = props;
+
+    useEffect(()=>{
+        if(!customer){
+            fetchCustomers();
+        }
+        
+    },[]);
+
+    const handleSubmit = (values) =>{
+        const { id } = values;
+        return updateCustomer(id, values).catch(e => {
+            throw new SubmissionError(e);
+        });
+    };
+
+    const handleOnBack = (event) =>{
+        event.preventDefault();
+        history.goBack();
+    };
+
+    const handleOnSubmitSuccess = () =>{
+        history.goBack();
+    };
 
     const renderBody = () => {
         return (
@@ -21,8 +46,16 @@ const CustomerContainer = (props) => {
                 path="/customer/:dni/edit" 
                 children = {
                     ({match}) => {
-                        const CustomerControl = match ? CustomerEdit : CustomerData;
-                        return <CustomerControl {...customer} />
+                        if(customer){
+                            const CustomerControl = match ? CustomerEdit : CustomerData;
+                            return <CustomerControl {...customer} 
+                                onBack = { handleOnBack }
+                                onSubmit = { handleSubmit } 
+                                onSubmitSuccess={ handleOnSubmitSuccess }
+                            />
+                        }
+
+                        return null;
                     }
                 }
             />
@@ -42,11 +75,18 @@ const CustomerContainer = (props) => {
 
 CustomerContainer.propTypes = {
     dni: PropTypes.string.isRequired,
-    customer: PropTypes.object.isRequired
+    customer: PropTypes.object,
+    fetchCustomers: PropTypes.func.isRequired,
+    updateCustomer: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, props) => ({
     customer: getCustomerByDni(state, props)
 });
 
-export default connect(mapStateToProps, null)(CustomerContainer);
+const mapDispatchToProps =  { 
+    fetchCustomers,
+    updateCustomer
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomerContainer));
